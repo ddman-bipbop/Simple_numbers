@@ -38,5 +38,36 @@ int main()
 	p5 = 5;
 	p = p5 + p5;
 	p.Print();
+	cout << "--------------" << endl;
+	p.Deduct(15).Print();
+	cout << "--------------" << endl;
+	p = 5;
+	p1 = 5;
+	cout << "p = "; p.Print();
+	cout << "p1 = "; p1.Print();
+	if (p > p1)
+		cout << "p > p1" << endl;
+	if (p < p1)
+		cout << "p < p1" << endl;
+	if (p >= p1)
+		cout << "p >= p1" << endl;
+	if (p <= p1)
+		cout << "p <= p1" << endl;
+	if (p == p1)
+		cout << "p == p1" << endl;
+	if (p != p1)
+		cout << "p != p1" << endl;
+	cout << "--------------" << endl;
+	p++;
+	p1++;
+	p.Print();
+	p1.Print();
+	cout << "--------------" << endl;
+	p--;
+	p1--;
+	p.Print();
+	p1.Print();
+	cout << "--------------" << endl;
+	cout << p << endl;
 	return 0;
 }

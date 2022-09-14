@@ -47,6 +47,16 @@ public:
 	SNumber Add(int a);
 	// Сложение c string
 	SNumber Add(string str);
+	//Вычитание
+	SNumber& Deduct(SNumber const& T);
+	//Вычитание
+	SNumber Deduct(SNumber const& T) const;
+	//Вычитание
+	SNumber Deduct(SNumber T) const;
+	//Вычитание
+	SNumber Deduct(int a);
+	//Вычитание
+	SNumber Deduct(string str);
 	// Умножение
 	SNumber& Mlp(SNumber const& T);
 	// Умножение
@@ -73,6 +83,25 @@ public:
 	SNumber operator*(SNumber T)const;
 	SNumber operator*(int a);
 	SNumber operator*(long int a);
+
+	SNumber operator-(SNumber T)const;
+	SNumber operator-(int a);
+	SNumber operator-(long int a);
+	//Операторы сравнения
+	bool operator<(SNumber const& T);
+	bool operator<=(SNumber const& T);
+	bool operator>(SNumber const& T);
+	bool operator>=(SNumber const& T);
+	bool operator==(SNumber const& T);
+	bool operator!=(SNumber const& T);
+	//Операции инкремента и декремента
+	SNumber operator++(); // ++a
+	SNumber operator++(int);//a++
+	SNumber operator--(); // --a
+	SNumber operator--(int);//a--
+	//Операции переопределение потоков ввода, вывода
+	friend ostream& operator<<(ostream& out, SNumber const& t);
+	friend istream& operator>>(istream& in, SNumber const& t);
 private:
 	// Вектор простых множителей
 	vector<int> pd_;

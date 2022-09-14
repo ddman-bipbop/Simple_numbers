@@ -76,6 +76,132 @@ SNumber SNumber::operator*(long int a)
 
 
 
+SNumber SNumber::operator-(SNumber T) const
+{
+    T.Deduct(*this);
+    return T;
+}
+
+
+
+SNumber SNumber::operator-(int a)
+{
+    SNumber R(a);
+    return R.Deduct(*this);
+}
+
+
+
+SNumber SNumber::operator-(long int a)
+{
+    SNumber R(a);
+    return R.Deduct(*this);
+}
+
+
+
+bool SNumber::operator<(SNumber const& T)
+{
+    return InDec(*this) < InDec(T);
+}
+
+
+
+bool SNumber::operator<=(SNumber const& T)
+{
+    return InDec(*this) <= InDec(T);
+}
+
+
+
+bool SNumber::operator>(SNumber const& T)
+{
+    return InDec(*this) > InDec(T);
+}
+
+
+
+bool SNumber::operator>=(SNumber const& T)
+{
+    return InDec(*this) >= InDec(T);
+}
+
+
+
+bool SNumber::operator==(SNumber const& T)
+{
+    return InDec(*this) == InDec(T);
+}
+
+
+
+bool SNumber::operator!=(SNumber const& T)
+{
+    return InDec(*this) != InDec(T);
+}
+
+
+
+SNumber SNumber::operator++()
+{
+    //++a
+    long int temp = InDec(*this);
+    temp++;
+    *this = temp;
+    SNumber T(temp);
+    return T;
+}
+
+
+
+SNumber SNumber::operator++(int)
+{
+    //a++
+    long int temp = InDec(*this);
+    SNumber T(temp);
+    temp++;
+    *this = temp;
+    return T;
+}
+
+
+
+SNumber SNumber::operator--()
+{
+    //--a
+    long int temp = InDec(*this);
+    temp--;
+    *this = temp;
+    SNumber T(temp);
+    return T;
+}
+
+
+
+SNumber SNumber::operator--(int)
+{
+    //a--
+    long int temp = InDec(*this);
+    SNumber T(temp);
+    temp--;
+    *this = temp;
+    return T;
+}
+
+
+
+ostream& operator<<(ostream& out, SNumber const& T)
+{
+    for (size_t i = 0; i < T.pd_.size(); i++)
+    {
+        out << T.pd_.at(i) << "  ";
+    }
+    out << endl;
+    return out;
+}
+
+
+
 SNumber& SNumber::Add(SNumber const& T)
 {
     return *this = InDec(*this) + InDec(T);
@@ -113,6 +239,57 @@ SNumber SNumber::Add(string str)
 {
     SNumber R(str);
     R.Add(*this);
+    return R;
+}
+
+
+
+SNumber& SNumber::Deduct(SNumber const& T)
+{
+    long int temp =  InDec(T) - InDec(*this);
+    if (temp  < 0) 
+    { 
+        this->pd_.clear();
+        this->pd_.push_back(1);
+        return *this;
+    }
+    else
+        *this = InDec(T) - InDec(*this);
+    return *this;
+}
+
+
+
+SNumber SNumber::Deduct(SNumber const& T) const
+{
+    SNumber R(*this);
+    R.Deduct(T);
+    return R;
+}
+
+
+
+SNumber SNumber::Deduct(SNumber T) const
+{
+    T.Deduct(*this);
+    return T;
+}
+
+
+
+SNumber SNumber::Deduct(int a)
+{
+    SNumber R(a);
+    R.Deduct(*this);
+    return R;
+}
+
+
+
+SNumber SNumber::Deduct(string str)
+{
+    SNumber R(str);
+    R.Deduct(*this);
     return R;
 }
 
@@ -195,7 +372,6 @@ SNumber::SNumber(int* a, int N)
 
 SNumber::SNumber(string str)
 {
-    pd_.clear();
     Factorize(stoi(str));
 }
 
@@ -203,7 +379,6 @@ SNumber::SNumber(string str)
 
 SNumber::SNumber(long int a)
 {
-    pd_.clear();
     Factorize(a);
 }
 
@@ -211,7 +386,6 @@ SNumber::SNumber(long int a)
 
 SNumber::SNumber(int a)
 {
-    pd_.clear();
     Factorize(a);
 }
 
@@ -219,7 +393,6 @@ SNumber::SNumber(int a)
 
 SNumber::SNumber()
 {
-    pd_.clear();
     pd_.push_back(1);
 }
 
